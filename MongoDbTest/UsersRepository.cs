@@ -129,5 +129,14 @@ namespace MongoDb
 
             return result.ModifiedCount != 0;
         }
+
+        /// <summary>
+        /// Creates index on defined field.
+        /// </summary>
+        public async Task CreateIndexOnCollection(IMongoCollection<BsonDocument> collection, string field)
+        {
+            var keys = Builders<BsonDocument>.IndexKeys.Ascending(field);
+            await collection.Indexes.CreateOneAsync(keys);
+        }
     }
 }
