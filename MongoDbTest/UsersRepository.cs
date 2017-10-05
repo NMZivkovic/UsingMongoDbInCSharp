@@ -131,6 +131,15 @@ namespace MongoDb
         }
 
         /// <summary>
+        /// Creates index on Name field.
+        /// </summary>
+        public async Task CreateIndexOnNameField()
+        {
+            var keys = Builders<User>.IndexKeys.Ascending(x => x.Name);
+            await _usersCollection.Indexes.CreateOneAsync(keys);
+        }
+
+        /// <summary>
         /// Creates index on defined field.
         /// </summary>
         public async Task CreateIndexOnCollection(IMongoCollection<BsonDocument> collection, string field)
